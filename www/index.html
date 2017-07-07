@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>domular-frontend</title>
+    <meta name="description" content="domular-frontend description">
+    <link rel="import" href="/polymer-style.html">
+    <link rel="import" href="/polymer-imports.html">
+    <!-- See https://goo.gl/OOhYW5 -->
+    <link rel="manifest" href="/manifest.json">
+    <script src="./js/frontend.js"></script>
+  </head>
+  <body>    
+<app-header reveals>
+  <app-toolbar>
+    <paper-icon-button icon="menu" onclick="left_drawer.toggle()"></paper-icon-button>
+    <div main-title>[ domulaRDashboard ]</div>    
+    <paper-icon-button icon="assignment" onclick="right_drawer.toggle()"></paper-icon-button>
+    <paper-progress value="10" indeterminate bottom-item></paper-progress>
+  </app-toolbar>
+</app-header>
+
+<div id="main-container" class="layout horizontal">
+  <paper-icon-button icon="search"></paper-icon-button>
+  <paper-icon-button icon="delete"></paper-icon-button>
+  <domular-frontend-app></domular-frontend-app>
+ </div>
+
+<app-drawer id="left_drawer">
+<app-toolbar>  
+<paper-icon-button icon="close" onclick="left_drawer.toggle()"></paper-icon-button>
+</app-toolbar>
+</app-drawer>
+
+<app-drawer id="right_drawer" align="right">
+<app-toolbar style="justify-content: flex-end;">  
+<paper-icon-button icon="delete"></paper-icon-button>
+<paper-icon-button icon="search"></paper-icon-button>
+<paper-icon-button icon="close" onclick="right_drawer.toggle()"></paper-icon-button>
+</app-toolbar>
+<div class="layout vertical" style="height: calc(100vh - 64px);">
+<domular-section-container id="group_container" section_name="Groups" section_type="group"></domular-section-container>
+<domular-section-container id="element_container" section_name="Elements"></domular-section-container>
+</div>
+</app-drawer> 
+
+<paper-dialog id="add_group_dialog">
+  <h2>Add Group</h2>
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+    irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  <div class="buttons">
+    <paper-button dialog-confirm autofocus>Accept</paper-button>
+    <paper-button dialog-dismiss>Cancel</paper-button>
+  </div>
+</paper-dialog>
+
+
+
+  </body>
+</html>

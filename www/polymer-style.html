@@ -1,0 +1,65 @@
+<custom-style>  
+  <style is="custom-style" include="iron-flex iron-flex-alignment">
+    html, body {
+      margin: 0;
+      font-family: 'Roboto', 'Noto', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      background: #f1f1f1;
+      height: 100%;
+    }
+    app-toolbar, domular-section-container
+    {
+      background-color: #4285f4;
+      color: #fff;
+    }
+
+    paper-icon-button {
+      --paper-icon-button-ink-color: white;
+    }
+
+    paper-icon-button + [main-title] {
+      margin-left: 24px;
+    }
+    paper-progress {
+      display: block;
+      width: 100%;
+      --paper-progress-active-color: rgba(255, 255, 255, 0.5);
+      --paper-progress-container-color: transparent;
+    }
+    app-header {
+      @apply --layout-fixed-top;
+      color: #fff;
+      --app-header-background-rear-layer: {
+        background-color: #ef6c00;
+      };
+    }
+    app-drawer {
+      /*--app-drawer-scrim-background: rgba(100, 100, 100, 0.8);*/
+      --app-drawer-width: 350px;
+      --app-drawer-content-container: {
+        background-color: white;
+      }
+    }
+    #main-container {
+      padding-top: 64px;
+    }
+
+    #group_container
+    {
+      height: calc(50vh - 32px);
+    }
+
+    #element_container
+    {
+      height: calc(50vh - 32px);
+    }
+
+.inner_shadow{
+box-shadow: inset 4px 3px 10px -3px #ABABAB;
+-webkit-box-shadow: inset 4px 3px 10px -3px #ABABAB;
+-moz-box-shadow: inset 4px 3px 10px -3px #ABABAB;
+-o-box-shadow: inset 4px 3px 10px -3px #ABABAB;
+}
+
+  </style>
+</custom-style>

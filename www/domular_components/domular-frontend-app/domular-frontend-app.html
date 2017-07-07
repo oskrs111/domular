@@ -1,0 +1,32 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="domular-frontend-app">
+  <template>
+    <style>
+      :host {
+        display: inline-block;
+      }
+    </style>
+    <h2>Hello [[prop1]]!</h2>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class DomularFrontendApp extends Polymer.Element {
+      static get is() { return 'domular-frontend-app'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'domular-frontend-app'
+          }
+        };
+      }
+    }
+
+    window.customElements.define(DomularFrontendApp.is, DomularFrontendApp);
+  </script>
+</dom-module>

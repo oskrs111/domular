@@ -1,0 +1,6 @@
+{
+  "name": "domular-frontend",
+  "short_name": "domular-frontend",
+  "start_url": "/",
+  "display": "standalone"
+}

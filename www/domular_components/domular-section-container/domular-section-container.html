@@ -1,0 +1,122 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="domular-section-container">
+  <template>
+    <style>
+      :host {
+        display: inline-block;
+      }
+      
+      *{box-sizing: border-box;}
+
+      .section
+      {
+        height: 32px;     
+        flex-direction: row;      
+        margin: 0 0 5px 0;
+        text-align: center;
+        position: relative;
+        width: 100%;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        padding: 3px;
+      }
+
+      .content
+      {
+        color:dimgrey;
+        background-color: white;
+        position: relative;
+        display: flex;
+        height: calc(100% - 96px);
+        flex-direction: column;
+        overflow-y: scroll;
+      }      
+
+      .column-a {width: 50%;  text-overflow: ellipsis; overflow:hidden; font-size: 15px;}      
+      .column-b, .column-c {width: 25%;}     
+      .column-a, .column-b, .column-c {align-self: flex-end;}
+
+    #section_menu
+    {
+      height: 48px;
+      display: none;      
+    }
+    </style>
+    <paper-tooltip for="add_button" position="left" offset="15">Add new Group</paper-tooltip>
+    <slot id="header">
+    </slot>
+    <div id="section_menu" class="section">
+    <div class="column-a"></div>
+    <div class="column-b"></div>
+    <div class="column-c">
+    <nebula-icon-button id="add_button" icon="icons:plus" on-click="_onAdd"></nebula-icon-button>  
+    </div>
+    </div>  
+    <div id="section_title" class="section">
+    <div class="column-a">[[section_name]]</div>
+    <div class="column-b">Visible</div>
+    <div class="column-c">Edit</div>
+    </div>      
+    <div id="content_container" class="content">
+    </div>      
+    <slot id="footer">
+    </slot>
+  </template>
+
+  <script>  
+    class DomularSectionContainer extends Polymer.Element {
+      static get is() { return 'domular-section-container'; }
+      static get properties() {
+        return {          
+            section_name:{
+              type: String,
+              value: "",
+              notify: true
+            },
+            section_type:{
+              value: "",
+              type: String
+            }                                   
+        }
+      }      
+      constructor() {
+        super();       
+        //this.section_name ='';
+        //this.container_type = '';
+      }    
+
+      connectedCallback(){
+        super.connectedCallback();
+        if(this.section_type === "group")
+        {
+          this.$.section_menu.style.display = "flex";
+        }         
+      }
+      
+      _onAdd()
+      {
+         this.dispatchEvent(new CustomEvent('add-group', {bubbles: true, composed: true}));
+      }
+
+      addElement(elm)
+      {
+        var element = document.createElement("domular-section-element");        
+        element.setAttribute("element_alias", elm.alias);
+        element.setAttribute("element_uuid", elm.uuid);
+        element.setAttribute("element_type", elm.type);
+        if(elm.type === "attribute")
+        {
+          element.setAttribute("element_value", elm.value);
+          element.setAttribute("element_rangeH", elm.rangeH);
+          element.setAttribute("element_rangeL", elm.rangeL);
+        }
+        
+        Polymer.dom(this.$.content_container).appendChild(element);
+      }  
+    }
+
+    window.customElements.define(DomularSectionContainer.is, DomularSectionContainer);
+  </script>
+</dom-module>

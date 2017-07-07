@@ -1,0 +1,33 @@
+{
+  "name": "domular",
+  "version": "1.0.0",
+  "description": " Node.js domotic system!",
+  "main": "app.js",
+  "scripts": {
+    "_start": "nodemon --inspect app.js",
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oskrs111/domular.git"
+  },
+  "keywords": [
+    "domotic",
+    "node",
+    "polymer",
+    "express"
+  ],
+  "author": "Oscar Sanz Llopis",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/oskrs111/domular/issues"
+  },
+  "homepage": "https://github.com/oskrs111/domular#readme",
+  "dependencies": {
+    "EventEmitter": "^1.0.0",
+    "express": "^4.15.3",
+    "morgan": "^1.8.2",
+    "ws": "^3.0.0"
+  }
+}

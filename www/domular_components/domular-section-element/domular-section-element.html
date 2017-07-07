@@ -1,0 +1,94 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/nebula-switch/nebula-switch.html"> 
+<link rel="import" href="../../bower_components/nebula-icon-button/nebula-icon-button.html"> 
+<link rel="import" href="../../bower_components/nebula-icons/nebula-icons.html">
+
+<dom-module id="domular-section-element">
+  <template>
+    <style>
+      :host {
+        display:block;    
+        width: 100%;    
+      }
+
+         .section:hover {
+        border: 1px solid grey;
+      }
+      
+      *{box-sizing: border-box;}
+
+      .section
+      {      
+        height: 32px;     
+        flex-direction: row;      
+        margin: 0 0 5px 0;        
+        text-align: center;
+        border: 1px solid transparent;          
+        position: relative;
+        width: 100%;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        padding: 3px;
+      }
+
+      .column-a {width: 50%;  text-overflow: ellipsis; overflow:hidden; font-size: 15px;}      
+      .column-b, .column-c {width: 25%;}     
+      .column-a, .column-b, .column-c {align-self: center;}
+
+    </style>
+    <div class="section">
+    <div class="column-a">[[element_alias]]</div>
+    <div class="column-b">
+    <nebula-switch checked="{{element_visible}}" on-checked-changed="_onCheckedChanged"></nebula-switch> 
+    </div>
+    <div class="column-c">
+    <nebula-icon-button icon="icons:edit" on-click="_onEdit"></nebula-icon-button>
+    </div>
+    </div>          
+  </template>
+
+  <script>  
+    class DomularSectionElement extends Polymer.Element {
+      static get is() { return 'domular-section-element'; }
+      static get properties() {
+        return {          
+            element_alias:{
+              type: String,
+              value: "",
+              notify: true
+            },    
+
+            element_uuid:{
+              type: String,
+              value: ""
+            },   
+
+            element_type:{
+              type: String,
+              value: ""              
+            }                                
+        }
+      }      
+
+      constructor() {
+        super();        
+      }    
+
+      _onCheckedChanged() 
+      {
+        console.log("_onCheckedChanged");
+      }
+
+      _onEdit()
+      {
+        console.log("_onEdit");
+      }
+
+
+    }
+    
+
+    window.customElements.define(DomularSectionElement.is, DomularSectionElement);
+  </script>
+</dom-module>
