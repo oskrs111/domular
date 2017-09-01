@@ -12,7 +12,8 @@
     "nebula-icon-button": "arsnebula/nebula-icon-button#^2.0.1",
     "nebula-icons": "arsnebula/nebula-icons#^2.0.1",
     "paper-tooltip": "^2.0.0",
-    "paper-dialog": "^2.0.0"
+    "paper-dialog": "^2.0.0",
+    "paper-button": "^2.0.0"
   },
   "devDependencies": {
     "web-component-tester": "Polymer/web-component-tester#^6.0.0",

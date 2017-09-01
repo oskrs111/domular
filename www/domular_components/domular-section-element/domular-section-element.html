@@ -11,7 +11,7 @@
         width: 100%;    
       }
 
-         .section:hover {
+      .section:hover {
         border: 1px solid grey;
       }
       
@@ -19,7 +19,7 @@
 
       .section
       {      
-        height: 32px;     
+        height: 35px;     
         flex-direction: row;      
         margin: 0 0 5px 0;        
         text-align: center;
@@ -31,18 +31,21 @@
         justify-content: flex-start;
         padding: 3px;
       }
-
-      .column-a {width: 50%;  text-overflow: ellipsis; overflow:hidden; font-size: 15px;}      
-      .column-b, .column-c {width: 25%;}     
-      .column-a, .column-b, .column-c {align-self: center;}
+      .column-a {width: 32px;}
+      .column-b {width: calc(50% - 32px);  text-overflow: ellipsis; overflow:hidden; font-size: 15px;}      
+      .column-c, .column-c {width: 25%;}     
+      .column-d, .column-b, .column-c {align-self: center;}
 
     </style>
     <div class="section">
-    <div class="column-a">[[element_alias]]</div>
-    <div class="column-b">
-    <nebula-switch checked="{{element_visible}}" on-checked-changed="_onCheckedChanged"></nebula-switch> 
-    </div>
+    <div class="column-a">
+     <nebula-icon id="icon" icon="[[_element_icon]]"></nebula-icon>
+    </div> 
+    <div class="column-b">[[element_alias]]</div>
     <div class="column-c">
+    <nebula-switch checked="{{_element_visible}}" ></nebula-switch> 
+    </div>
+    <div class="column-d">
     <nebula-icon-button icon="icons:edit" on-click="_onEdit"></nebula-icon-button>
     </div>
     </div>          
@@ -64,10 +67,38 @@
               value: ""
             },   
 
-            element_type:{
+            element_type:{ // "group" "switch" | "range" | "video" => also are icon-names
               type: String,
               value: ""              
-            }                                
+            },
+
+            element_value:{
+              type: String,
+              value: ""    
+            },
+            
+            element_rangeH:{
+              type: String,
+              value: ""    
+            },
+
+            element_rangeL:{
+              type: String,
+              value: ""    
+            },
+
+            _element_icon:{
+              type: String,
+              value: "icons:undefined"    
+            },
+
+            _element_visible:{
+              type: Boolean,
+              reflectToAttribute: true,
+              notify: true,
+              observer: '_onVisibleChange'
+              //on-checked-changed="_onCheckedChanged"
+            }
         }
       }      
 
@@ -75,9 +106,46 @@
         super();        
       }    
 
-      _onCheckedChanged() 
+      ready()
       {
-        console.log("_onCheckedChanged");
+        super.ready();
+        switch(this.element_type)
+        {
+          case "group":
+            this._element_icon = "icons:group";
+            break;
+
+          case "switch":
+            this._element_icon = "icons:switch";
+            break;
+
+          case "dimmer":
+            this._element_icon = "icons:dimmer";
+            break;  
+
+          case "temperature":
+            this._element_icon = "icons:temperature";
+            break;    
+
+          case "range":
+            this._element_icon = "icons:range";
+            break;
+
+          case "video": 
+            this._element_icon = "icons:video";
+            break;
+
+          default:
+          break;  
+
+        }
+      }
+
+      _onVisibleChange() 
+      {
+        //console.log("_onCheckedChanged");        
+        event = new CustomEvent('element-visible-change', {bubbles: true, composed: true, detail: {uuid: this.element_uuid, visible: this._element_visible }});
+        this.dispatchEvent(event);
       }
 
       _onEdit()
@@ -88,7 +156,6 @@
 
     }
     
-
     window.customElements.define(DomularSectionElement.is, DomularSectionElement);
   </script>
 </dom-module>

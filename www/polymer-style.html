@@ -1,5 +1,12 @@
 <custom-style>  
   <style is="custom-style" include="iron-flex iron-flex-alignment">
+
+  :root {
+    --main-domular-color: #4285f4;
+    --nebula-switch-checked-color: var(--main-domular-color);
+    --nebula-switch-color: lightgrey;
+  }
+
     html, body {
       margin: 0;
       font-family: 'Roboto', 'Noto', sans-serif;
@@ -7,9 +14,10 @@
       background: #f1f1f1;
       height: 100%;
     }
+
     app-toolbar, domular-section-container
     {
-      background-color: #4285f4;
+      background-color: var(--main-domular-color);
       color: #fff;
     }
 
@@ -33,6 +41,7 @@
         background-color: #ef6c00;
       };
     }
+
     app-drawer {
       /*--app-drawer-scrim-background: rgba(100, 100, 100, 0.8);*/
       --app-drawer-width: 350px;
@@ -40,6 +49,7 @@
         background-color: white;
       }
     }
+    
     #main-container {
       padding-top: 64px;
     }

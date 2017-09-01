@@ -1,22 +1,36 @@
 window.addEventListener('WebComponentsReady', function(e) {
   // imports are loaded and elements have been registered
   console.log('Components are ready');
+  document.getElementById("progress_bar").indeterminate = false;
+  document.getElementById("progress_bar").value = 100;
 
-  var element = {alias: "Group", uuid: "123455667", type: "group"};
-  for(var t=0; t < 100; t++)
+
+  var element = {alias: "Group", uuid: "123455667", type: "group", value: "newValue", rangeH:"rangeHigh", rangeL:"rangeLow"};
+  for(var t=0; t < 5; t++)
   {
-    element.alias = "Grupo " + t;
-    document.getElementById("group_container").addElement(element);
-
-    element.alias = "Elemento " + t;
-    document.getElementById("element_container").addElement(element);
+    element.alias = "Grupo " + t;    
+    document.getElementById("group_container").addElement(element);   
   }
 
-  document.addEventListener('add-group', onAddGroup);
+  element.alias = "Elemento interruptor";
+  element.type = "switch";
+  document.getElementById("element_container").addElement(element);
+
+  element.alias = "Elemento rango";
+  element.type = "range";
+  document.getElementById("element_container").addElement(element);
+
+  element.alias = "Elemento video";
+  element.type = "video";
+  document.getElementById("element_container").addElement(element);
+
+  document.addEventListener('element-visible-change', onVisibleChange);
+
 });
 
-function onAddGroup()
+function onVisibleChange(e)
 {
-  document.getElementById("add_group_dialog").open();  
+  console.log("onVisibleChange");
 }
+
 //<domular-section-element element_name="Group 02"></domular-section-element>

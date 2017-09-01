@@ -1,0 +1,130 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<dom-module id="domular-group-editor">
+  <template>
+    <style>
+      :host {        
+        display: block;
+        z-index: 200;
+        position: relative;
+      }
+      
+      *{box-sizing: border-box;}
+  
+   paper-dialog{
+        max-width: 700px;
+        max-height: 90vh;        
+      }
+
+@media screen and (max-width: 479px) {
+     /* start of phone styles */
+    paper-dialog{
+         max-width: 300px;
+    }
+}
+     
+      .content
+      {
+        display: block;
+        overflow-y: auto;
+        height: 70vh;
+      }
+
+    </style>
+<paper-dialog id="editor_dialog" modal>
+  <h2>[[dialog_behaviour]]</h2>
+  <div class="content">
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+    irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+    irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+    irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+    irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+    irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+    irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+    irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  </div>
+  <div class="buttons">
+    <paper-button on-tap="_onAcceptTap" autofocus>Accept</paper-button>
+    <paper-button dialog-dismiss>Cancel</paper-button>
+  </div>
+</paper-dialog>
+  </template>
+  <script>  
+    class DomularGroupEditor extends Polymer.Element {
+      static get is() { return 'domular-group-editor'; }
+      static get properties() {
+        return {          
+            
+            dialog_behaviour:{
+              type: String,
+              value: ""              
+            },
+            group_type:{ // "switch" | "range" 
+              type: String,
+              value: ""              
+            },
+            
+            group_alias:{
+              type: String,
+              value: "",              
+            },    
+
+            group_uuid:{
+              type: String,
+              value: ""
+            },                                     
+        }
+      }      
+      constructor() {
+        super();              
+      }    
+
+      connectedCallback(){
+        super.connectedCallback();        
+      }
+
+      open(behaviour)
+      {
+          switch(behaviour)
+          {
+            case "add": 
+                this.dialog_behaviour = "New Group";
+                break;
+
+            case "edit": 
+                this.dialog_behaviour = "Edit Group";
+                break;
+
+            default:
+                this.dialog_behaviour = "Dialog...";
+                return;
+          }
+          
+          this.$.editor_dialog.open();
+      }
+
+      close()
+      {
+          this.$.editor_dialog.close();
+      }
+      
+      _onAcceptTap()
+      {
+        console.log("_onAcceptTap");
+        //this.close();
+      }
+
+      _onSuccess()
+      {
+         this.dispatchEvent(new CustomEvent('edit-group-success', {bubbles: true, composed: true}));
+      }     
+    }
+
+    window.customElements.define(DomularGroupEditor.is, DomularGroupEditor);
+  </script>
+</dom-module>
